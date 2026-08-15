@@ -1,6 +1,6 @@
 import { RequestConfig } from "./types";
 
-const token = () => uni.getStorageSync("token") || "";
+const getToken = () => uni.getStorageSync("token") || "";
 
 // 请求拦截器
 export const requestInterceptor = (config: RequestConfig) => {

@@ -16,6 +16,16 @@
         </view>
       </view>
     </view>
+    <view class="content">
+      <swiper class="banner-swiper" indicator-dots autoplay circular indicator-color="rgba(255,255,255,0.3)"
+        indicator-active-color="#fff">
+        <swiper-item v-for="item in bannerList" :key="item.title">
+          <view class="banner-item-content">
+            <image :src="item.url" mode="aspectFill"></image>
+          </view>
+        </swiper-item>
+      </swiper>
+    </view>
   </view>
 </template>
 
@@ -23,6 +33,8 @@
   import { onLoad } from '@dcloudio/uni-app';
   import { ref, computed } from 'vue';
   import { reverseCode } from '../utils/geoCode';
+  import { get } from '../utils/http';
+  import { BannerItem } from './index.ts';
   const menuButtonInfo = ref<any>(null);
   onLoad(() => {
     // 胶囊按钮数据获取
@@ -38,6 +50,9 @@
 
     // 获取用户地理位置
     startLocation();
+
+    // 获取banner轮播图
+    getBannerList();
   })
 
   // 导航栏胶囊按钮兼容 ----------------start----------------------
@@ -133,8 +148,16 @@
       }
     })
   }
-
   // 地理信息定位 --------------------end----------------------
+
+  // banner获取  ------------------start----------------------
+  const bannerList = ref<BannerItem[]>([])
+  const getBannerList = async () => {
+    const data = await get("/home/banner");
+    bannerList.value = data.banner;
+  }
+  // banner获取  ------------------end----------------------------
+
 </script>
 <style scoped lang="scss">
   .container {
@@ -173,6 +196,28 @@
 
         .search-box {
           width: 340rpx;
+        }
+      }
+    }
+
+    .content {
+      // padding: 0 20rpx;
+
+      .banner-swiper {
+        width: 100%;
+        height: 350rpx;
+        // margin-top: 4rpx;
+        // border-radius: 16rpx;
+
+        .banner-item-content {
+          width: 100%;
+          height: 100%;
+
+          image {
+            width: 100%;
+            height: 100%;
+            // border-radius: 16rpx;
+          }
         }
       }
     }
