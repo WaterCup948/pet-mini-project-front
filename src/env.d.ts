@@ -1,8 +1,10 @@
 /// <reference types="vite/client" />
 
-declare module '*.vue' {
-  import type { DefineComponent } from 'vue'
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const component: DefineComponent<object, object, any>
-  export default component
+interface ImportMetaEnv {
+  /** 后端请求基础地址 */
+  readonly VITE_BASE_URL: string;
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
 }
