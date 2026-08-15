@@ -30,7 +30,13 @@
       "urlCheck": false
     },
     "usingComponents": true,
-    "mergeVirtualHostAttributes": true
+    "mergeVirtualHostAttributes": true,
+    "permission": {
+      "scope.userLocation": {
+        "desc": "你的位置信息将用于小程序展示附近服务"
+      }
+    },
+    "requiredPrivateInfos": ["getLocation"]
   },
   "quickapp": {},
   "h5": {
