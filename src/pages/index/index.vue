@@ -25,6 +25,29 @@
           </view>
         </swiper-item>
       </swiper>
+      <view class="part">
+        <up-scroll-list indicatorColor="rgba(255,255,255,0.3)" indicatorActiveColor="#ffce2c">
+          <view class="scroll-item" v-for="item in partList" :key="item.title">
+            <image class="scroll-image" :src="item.url" mode="aspectFill"></image>
+            <text class="item-title">{{ item.title }}</text>
+          </view>
+        </up-scroll-list>
+      </view>
+      <view class="part">
+        <view class="p-4 bg-white">
+          <up-box height="350rpx" gap="12px">
+            <template #left>
+              <image class="box-image" src="/src/static/modules/home/pic1.png" mode="aspectFill" />
+            </template>
+            <template #rightTop>
+              <image class="box-image" src="/src/static/modules/home/pic2.png" mode="aspectFill" />
+            </template>
+            <template #rightBottom>
+              <image class="box-image" src="/src/static/modules/home/pic3.png" mode="aspectFill" />
+            </template>
+          </up-box>
+        </view>
+      </view>
     </view>
   </view>
 </template>
@@ -34,7 +57,7 @@
   import { ref, computed } from 'vue';
   import { reverseCode } from '../utils/geoCode';
   import { get } from '../utils/http';
-  import { BannerItem } from './index.ts';
+  import { ImageItem } from './index.ts';
   const menuButtonInfo = ref<any>(null);
   onLoad(() => {
     // 胶囊按钮数据获取
@@ -53,6 +76,9 @@
 
     // 获取banner轮播图
     getBannerList();
+
+    // 获取分区列表
+    getPartList();
   })
 
   // 导航栏胶囊按钮兼容 ----------------start----------------------
@@ -70,7 +96,7 @@
     // #endif
     // #ifdef WEB || APP-PLUS
     style = {
-      height: "90px"
+      height: "60px"
     }
     // #endif
     return style;
@@ -91,7 +117,7 @@
     // #endif
     // #ifdef WEB || APP-PLUS
     style = {
-      top: "20px",
+      top: "5px",
       height: "50px"
     }
     // #endif
@@ -151,13 +177,28 @@
   // 地理信息定位 --------------------end----------------------
 
   // banner获取  ------------------start----------------------
-  const bannerList = ref<BannerItem[]>([])
+  const bannerList = ref<ImageItem[]>([])
   const getBannerList = async () => {
-    const data = await get("/home/banner");
-    bannerList.value = data.banner;
+    try {
+      const data = await get("/home/banner");
+      bannerList.value = data.banner;
+    } catch (error) {
+      console.log(error);
+    }
   }
   // banner获取  ------------------end----------------------------
 
+  // 功能列表板块 ------------------start----------------------
+  const partList = ref<ImageItem[]>([])
+  const getPartList = async () => {
+    try {
+      const data = await get("/home/part");
+      partList.value = data.part;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  // 功能列表板块 ------------------end----------------------
 </script>
 <style scoped lang="scss">
   .container {
@@ -201,7 +242,7 @@
     }
 
     .content {
-      // padding: 0 20rpx;
+      padding: 10rpx 0;
 
       .banner-swiper {
         width: 100%;
@@ -218,6 +259,39 @@
             height: 100%;
             // border-radius: 16rpx;
           }
+        }
+      }
+
+      .part {
+        background-color: #fff;
+        margin-top: 20rpx;
+        margin-bottom: 24rpx;
+        border-radius: 16rpx;
+        padding: 30rpx;
+
+        .scroll-item {
+          text-align: center;
+
+          .scroll-image {
+            width: 90rpx;
+            height: 90rpx;
+            box-sizing: border-box;
+            margin: 0 20rpx;
+          }
+
+          .scroll-text {
+            font-size: 24rpx;
+            color: $uni-text-color;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+        }
+
+        .box-image {
+          width: 100%;
+          height: 100%;
+          border-radius: 16rpx;
         }
       }
     }
