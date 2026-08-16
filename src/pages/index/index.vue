@@ -48,6 +48,27 @@
           </up-box>
         </view>
       </view>
+      <view class="exchange-section">
+        <view class="section-title-area">
+          <text class="section-title">省钱速报</text>
+          <text class="section-subtitle">折扣促销每日更新</text>
+          <view class="go-btn">GO</view>
+        </view>
+        <view class="promo-cards">
+          <view class="promo-card">
+            <image class="image-placeholder" src="/src/static/modules/home/pic4.jpg" mode="aspectFill" />
+            <text class="promo-title">到店服务</text>
+            <text class="promo-desc">限时降价</text>
+            <view class="small-go">GO</view>
+          </view>
+          <view class="promo-card">
+            <image class="image-placeholder" src="/src/static/modules/home/pic5.jpg" mode="aspectFill" />
+            <text class="promo-title">领券中心</text>
+            <text class="promo-desc">618立减</text>
+            <view class="small-go">GO</view>
+          </view>
+        </view>
+      </view>
     </view>
   </view>
 </template>
@@ -293,6 +314,86 @@
           height: 100%;
           border-radius: 16rpx;
         }
+      }
+
+      .exchange-section {
+        background-color: #fff;
+        border-radius: 16rpx;
+        padding: 30rpx;
+        margin-bottom: 24rpx;
+
+        .section-title-area {
+          display: flex;
+          align-items: center;
+          margin-bottom: 24rpx;
+
+          .section-title {
+            font-size: 32rpx;
+            font-weight: bolder;
+            color: #000;
+            margin-right: 16rpx;
+          }
+
+          .section-subtitle {
+            font-size: 24rpx;
+            color: $uni-text-color-grey;
+            flex: 1;
+          }
+
+          .go-btn {
+            background-color: #ff6b81;
+            border-radius: 22rpx;
+            font-size: 24rpx;
+            color: #fff;
+            padding: 4rpx 20rpx;
+          }
+        }
+
+        .promo-cards {
+          display: flex;
+          justify-content: space-between;
+
+          .promo-card {
+            width: 50%;
+            background-color: #f9f9f9;
+            border-radius: 16rpx;
+            padding: 20rpx;
+            position: relative;
+
+            .image-placeholder {
+              width: 100%;
+              height: 160rpx;
+              border-radius: 8rpx;
+              margin-bottom: 16rpx;
+            }
+
+            .promo-title {
+              font-size: 28rpx;
+              color: $uni-text-color;
+              line-height: 40rpx;
+              display: block;
+            }
+
+            .promo-desc {
+              font-size: 24rpx;
+              color: #999;
+              line-height: 34rpx;
+              display: block;
+            }
+
+            .small-go {
+              position: absolute;
+              right: 20rpx;
+              bottom: 20rpx;
+              background-color: #ff6b81;
+              border-radius: 16rpx;
+              font-size: 20rpx;
+              color: #fff;
+              padding: 2rpx 16rpx;
+            }
+          }
+        }
+
       }
     }
   }
